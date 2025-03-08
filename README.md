@@ -122,8 +122,5 @@ rmarkdown::render("HARD/HARD_SOL.Rmd")  # For HARD task
 - Open the corresponding PDF file  
 
 
-## **Contributors**
-- **Disha H. Davey**
-
 
 
