@@ -1,0 +1,57 @@
+---
+title: "HARD_SOL"
+author: "DISHA"
+date: "2025-03-07"
+output: 
+  pdf_document: 
+    toc: true
+    fig_caption: true
+    number_sections: true
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## **Step 1: Install & Load Packages**
+```{r}
+library(igraph)
+library(data.table)
+```
+
+## **Step 2: Define Schema Relationships as a Graph**
+```{r}
+edges <- data.table(from = c("Customers", "Orders", "Orders", "Payments", "Products"),
+                    to = c("Orders", "Payments", "Products", "Refunds", "Suppliers"))
+
+# Convert into Graph Structure
+graph <- graph_from_data_frame(edges, directed = TRUE)
+```
+
+## **Step 3: Compute Network Metrics**
+```{r}
+node_degree <- degree(graph, mode = "all")  # Total connections (in + out)
+betweenness_values <- betweenness(graph)  # Centrality measure
+```
+
+## **Step 4: Add Node Attributes (Size, Color)**
+```{r}
+V(graph)$size <- node_degree * 5 + 15  # Adjust size based on degree
+V(graph)$color <- ifelse(node_degree > 2, "red", "lightblue")  # Highlight key nodes
+V(graph)$label <- V(graph)$name  # Display table names
+```
+
+## **Step 5: Plot the Enhanced Graph with Advanced Layout**
+```{r}
+set.seed(42)  # Ensures consistent layout
+plot(graph, 
+     layout = layout_with_kk(graph),  # Kamada-Kawai layout for better structure
+     vertex.size = V(graph)$size,  
+     vertex.color = V(graph)$color, 
+     vertex.label.cex = 1.2, 
+     edge.arrow.size = 0.7, 
+     edge.color = "darkgrey",
+     main = "Advanced Database Schema Representation")
+```

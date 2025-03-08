@@ -1,0 +1,64 @@
+---
+title: "EASY_SOL"
+author: "DISHA"
+date: "2025-03-07"
+output:
+  pdf_document: 
+    toc: true
+    fig_caption: true
+    number_sections: true
+    keep_tex: true
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Step 1: Install & Load Packages**
+```{r}
+library(data.table)
+library(ggplot2)
+library(reshape2)
+```
+
+## **Step 2: Create & Merge Data Tables**
+```{r}
+students <- data.table(student_id = c(1, 2, 3, 4, 5),
+                       name = c("Alice", "Bob", "Charlie", "David", "Eva"),
+                       age = c(20, 21, 19, 22, 20))
+
+exam_scores <- data.table(student_id = c(2, 3, 5, 6),
+                          math_score = c(85, 90, 78, 88),
+                          science_score = c(80, 85, 75, 89))
+
+# Full Outer Join
+gg <- merge(students, exam_scores, by = "student_id", all = TRUE)
+print("Merged Data:")
+print(gg)
+```
+
+## **Step 3: Handle Missing Values**
+```{r}
+gg[is.na(math_score), math_score := 0]
+gg[is.na(science_score), science_score := 0]
+```
+
+## **Step 4: Reshape Data for Visualization**
+```{r}
+long_data <- melt(gg, id.vars = c("student_id", "name"), 
+                  measure.vars = c("math_score", "science_score"),
+                  variable.name = "Subject", value.name = "Score")
+```
+
+## **Step 5: Plot Student Scores**
+```{r}
+ggplot(long_data, aes(x = factor(student_id), y = Score, fill = Subject)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.7)) +
+  geom_text(aes(label = Score), vjust = -0.5, position = position_dodge(width = 0.7)) +
+  labs(title = "Student Exam Scores", x = "Student ID", y = "Score") +
+  scale_fill_manual(values = c("math_score" = "blue", "science_score" = "red"),
+                    labels = c("Math Score", "Science Score")) +
+  theme_minimal()
+```

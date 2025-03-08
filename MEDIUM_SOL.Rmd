@@ -1,0 +1,81 @@
+---
+title: "MEDIUM_SOL"
+author: "DISHA"
+date: "2025-03-07"
+output: 
+  pdf_document: 
+    toc: true
+    fig_caption: true
+    number_sections: true
+    keep_tex: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Student Performance Analysis
+
+### Load Required Libraries
+```{r}
+library(data.table)
+library(ggplot2)
+library(reshape2)
+```
+
+### Create Data Tables
+```{r}
+# Student Data
+students <- data.table(student_id = c(1, 2, 3, 4, 5, 6),
+                       name = c("Alice", "Bob", "Charlie", "David", "Eva", "Frank"),
+                       age = c(20, 21, 19, 22, 20, 23))
+
+# Exam Scores Data
+exam_scores <- data.table(student_id = c(2, 3, 4, 5, 7),
+                          math_score = c(85, 90, 88, 78, 92),
+                          science_score = c(80, 85, 89, 75, 95))
+
+# Attendance Data
+attendance <- data.table(student_id = c(1, 2, 3, 5, 6),
+                         attendance_percentage = c(95, 88, 90, 85, 92))
+```
+
+### Merge the Data
+```{r}
+# Merge Students with Exam Scores
+merged_data <- merge(students, exam_scores, by = "student_id", all = TRUE)
+
+# Merge the result with Attendance Data
+final_data <- merge(merged_data, attendance, by = "student_id", all = TRUE)
+```
+
+### Handle Missing Values using Mean Imputation
+```{r}
+for (col in c("math_score", "science_score", "attendance_percentage")) {
+  final_data[is.na(get(col)), (col) := mean(final_data[[col]], na.rm = TRUE)]
+}
+```
+
+### Print Final Merged Data Table
+```{r}
+print("Final Merged Data:")
+print(final_data)
+```
+
+### Reshape Data for Visualization
+```{r}
+long_data <- melt(final_data, id.vars = c("student_id", "name"), 
+                  measure.vars = c("math_score", "science_score", "attendance_percentage"),
+                  variable.name = "Category", value.name = "Value")
+```
+
+### Create an Advanced Bar Chart with Trends
+```{r}
+ggplot(long_data, aes(x = factor(student_id), y = Value, fill = Category)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.7)) +
+  geom_text(aes(label = round(Value, 1)), vjust = -0.5, position = position_dodge(width = 0.7)) +
+  labs(title = "Student Performance Overview", x = "Student ID", y = "Value") +
+  scale_fill_manual(values = c("math_score" = "blue", "science_score" = "red", "attendance_percentage" = "green"),
+                    labels = c("Math Score", "Science Score", "Attendance %")) +
+  theme_minimal()
+```
