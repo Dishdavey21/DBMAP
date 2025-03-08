@@ -1,71 +1,83 @@
-# DBMAP - Data-Based Machine Learning Algorithm Project
+#  DBMAP - Database Management & Processing in R
 
-This repository contains the implementation of various data-based machine learning techniques categorized into **Easy**, **Medium**, and **Hard** levels. The project follows a structured approach to problem-solving using different methodologies, ensuring a progressive learning curve.
+## Project Overview  
+DBMAP (**Database Management and Processing**) is a project implemented in **R** to demonstrate key concepts in **data manipulation, visualization, multi-table joins, missing value handling, and graph-based database schema representation**.
 
-## Project Overview
-The **DBMAP** project is designed to demonstrate different levels of complexity in data handling, feature engineering, and machine learning model training. Each level contains an R Markdown (`.Rmd`) file that executes specific techniques and generates corresponding results in PDF format.
+The project is structured into **three levels** of complexity:  
+ **EASY:** Basic data processing and visualization  
+ **MEDIUM:** Advanced data handling with multiple datasets  
+ **HARD:** Graph-based database schema representation  
 
-## Tasks Completed
-### **Easy Task: Basic Data Processing & Visualization**
-#### **Objective:**
-- Perform fundamental data processing and generate simple visualizations using R.
+Each section contains R Markdown (`.Rmd`) files that generate insights and structured reports (`.pdf`).  
 
-#### **Files Added:**
-- `EASY/EASY_SOL.Rmd` – Contains the implementation of basic data handling and visualization.
-- `EASY/EASY_SOL.pdf` – Generated output showcasing results.
+---
 
-#### **What We Did:**
-- Loaded a dataset and performed basic exploratory data analysis (EDA).
-- Created simple visualizations (scatter plots, histograms, and line graphs).
-- Used `ggplot2` for data visualization.
+##  Tasks Completed  
 
-#### **Run it using:**
+###  EASY Task: Basic Data Processing  
+** Objective:**  
+- Perform **basic data handling** using `data.table`  
+- Merge student-related datasets and visualize the results  
+
+**📂 Files Added:**  
+- `EASY/EASY_SOL.Rmd` – R Markdown script  
+- `EASY/EASY_SOL.pdf` – PDF output  
+
+** What We Did:**  
+- Used `merge()` to **join multiple tables** (students & exam scores)  
+- Handled missing values by replacing them with `0`  
+- Created a **bar chart** to visualize student scores using `ggplot2`  
+
+** Run it using:**  
 ```r
 rmarkdown::render("EASY/EASY_SOL.Rmd")
 ```
 
 ---
-### **Medium Task: Feature Engineering & Model Training**
-#### **Objective:**
-- Implement feature extraction techniques and train a machine learning model.
 
-#### **Files Added:**
-- `MEDIUM/MEDIUM_SOL.Rmd` – Contains feature engineering and model implementation.
-- `MEDIUM/MEDIUM_SOL.pdf` – Generated output showcasing results.
+###  MEDIUM Task: Advanced Data Processing & Visualization  
 
-#### **What We Did:**
-- Performed data preprocessing and feature selection.
-- Applied **Principal Component Analysis (PCA)** for dimensionality reduction.
-- Trained a classification model using **Naïve Bayes**.
-- Evaluated model performance using accuracy and confusion matrices.
+** Objective:**  
+- Handle multiple datasets, process missing values, and generate advanced visualizations  
 
-#### **Run it using:**
+** Files Added:**  
+- `MEDIUM/MEDIUM_SOL.Rmd` – R Markdown script  
+- `MEDIUM/MEDIUM_SOL.pdf` – PDF output  
+
+** What We Did:**  
+- Merged multiple tables (students, exam_scores, and attendance)  
+- Applied Mean Imputation for missing values  
+- Created a grouped bar chart visualizing trends in student performance  
+
+** Run it using:**  
 ```r
 rmarkdown::render("MEDIUM/MEDIUM_SOL.Rmd")
 ```
 
 ---
-### **Hard Task: Clustering & Advanced Model Implementation**
-#### **Objective:**
-- Implement unsupervised learning techniques for data clustering.
 
-#### **Files Added:**
-- `HARD/HARD_SOL.Rmd` – Contains clustering techniques.
-- `HARD/HARD_SOL.pdf` – Generated output showcasing results.
+### 3️⃣ HARD Task: Graph-Based Database Schema Representation  
 
-#### **What We Did:**
-- Applied **K-Means Clustering** and **Hierarchical Clustering**.
-- Implemented **DBSCAN** (Density-Based Spatial Clustering of Applications with Noise).
-- Compared clustering results using different evaluation metrics.
-- Visualized cluster formation and separation.
+** Objective:**  
+- Represent a database schema using graph structures and analyze relationships  
 
-#### **Run it using:**
+** Files Added:**  
+- `HARD/HARD_SOL.Rmd` – R Markdown script  
+- `HARD/HARD_SOL.pdf` – PDF output  
+
+** What We Did:**  
+- Used the `igraph` library to visualize database relationships  
+- Computed network metrics (degree, betweenness centrality)  
+- Applied Kamada-Kawai layout for structured visualization  
+
+** Run it using:**  
 ```r
 rmarkdown::render("HARD/HARD_SOL.Rmd")
 ```
 
 ---
-## **Project Structure**
+
+##  Project Structure  
 ```
 DBMAP/
 │── EASY/
@@ -83,13 +95,32 @@ DBMAP/
 │── README.md
 ```
 
-## **How to Use This Repository**
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/Dishdavey21/DBMAP.git
-   ```
-2. Navigate to the appropriate folder (`EASY`, `MEDIUM`, or `HARD`).
-3. Open the `.Rmd` file in RStudio or run it using `rmarkdown::render()`.
+---
+
+##  How to Use This Repository  
+
+### 1️⃣ Clone the Repository  
+```sh
+git clone https://github.com/Dishdavey21/DBMAP.git
+cd DBMAP
+```
+
+### 2️⃣ Install Required Packages in R  
+```r
+install.packages(c("data.table", "ggplot2", "igraph", "rmarkdown"))
+```
+
+### 3️⃣ Run the R Markdown Files  
+```r
+rmarkdown::render("EASY/EASY_SOL.Rmd")  # For EASY task
+rmarkdown::render("MEDIUM/MEDIUM_SOL.Rmd")  # For MEDIUM task
+rmarkdown::render("HARD/HARD_SOL.Rmd")  # For HARD task
+```
+
+### 4️⃣ View Output PDFs  
+- Navigate to the `EASY/`, `MEDIUM/`, or `HARD/` folder  
+- Open the corresponding PDF file  
+
 
 ## **Contributors**
 - **Disha H. Davey**
