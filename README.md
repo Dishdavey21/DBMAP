@@ -94,6 +94,5 @@ DBMAP/
 ## **Contributors**
 - **Disha H. Davey**
 
-## **License**
-This project is licensed under the MIT License. Feel free to modify and distribute.
+
 
