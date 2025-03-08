@@ -71,12 +71,15 @@ DBMAP/
 │── EASY/
 │   ├── EASY_SOL.Rmd
 │   ├── EASY_SOL.pdf
+|   ├── README.md
 │── MEDIUM/
 │   ├── MEDIUM_SOL.Rmd
 │   ├── MEDIUM_SOL.pdf
+|   ├── README.md
 │── HARD/
 │   ├── HARD_SOL.Rmd
 │   ├── HARD_SOL.pdf
+|   ├── README.md
 │── README.md
 ```
 
